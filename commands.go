@@ -17,7 +17,7 @@ func validCommands() map[string]cliCommand {
 		},
 		"help": {
 			name:        "help",
-			description: "Prints this help message",
+			description: "Prints this help message.",
 			callback:    commandHelp,
 		},
 	}
@@ -34,7 +34,7 @@ func commandHelp() error {
 	fmt.Println("")
 	commands := validCommands()
 	for _, command := range commands {
-		fmt.Printf("%s: %s\n", command.name, command.description)
+		fmt.Printf("%v: %v\n", command.name, command.description)
 	}
 	fmt.Println("")
 	return nil
