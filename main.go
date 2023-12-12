@@ -18,14 +18,20 @@ func main() {
 		input := scanner.Text()
 		input = strings.TrimSpace(input)
 
+		if input == "" {
+			commands["help"].callback()
+			continue
+		}
+
 		command, ok := commands[input]
 
 		if !ok {
 			fmt.Println("🤖 invalid command")
+			commands["help"].callback()
 			continue
 		}
 
-		if command.name == "exit" || command.name == "quit" {
+		if input == "exit" || input == "quit" {
 			command.callback()
 			break
 		}
