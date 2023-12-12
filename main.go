@@ -9,6 +9,7 @@ import (
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+	commands := validCommands()
 
 	for {
 		fmt.Print("gokedex 🎮 ")
@@ -17,18 +18,18 @@ func main() {
 		input := scanner.Text()
 		input = strings.TrimSpace(input)
 
-		if input == "exit" {
-			fmt.Println("Quitting Gokedex 👋")
-			break
-		}
+		command, ok := commands[input]
 
-		if input == "help" || input == "?" || input == "" {
-			fmt.Println("Gokedex commands are: ")
-			fmt.Println("help - shows the help menu you're reading :)")
-			fmt.Println("exit - quits Gokedex")
+		if !ok {
+			fmt.Println("🤖 invalid command")
 			continue
 		}
 
-		fmt.Println("🤖 invalid command")
+		if command.name == "exit" || command.name == "quit" {
+			command.callback()
+			break
+		}
+
+		command.callback()
 	}
 }
