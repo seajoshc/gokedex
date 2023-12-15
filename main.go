@@ -58,6 +58,11 @@ func validCommands() map[string]cliCommand {
 			description: "Prints this help message.",
 			callback:    commandHelp,
 		},
+		"map": {
+			name:        "map",
+			description: "Location areas are sections of areas, such as floors in a building or cave. Each area has its own set of possible Pokémon encounters.",
+			callback:    commandMap,
+		},
 	}
 }
 
