@@ -7,8 +7,8 @@ import (
 )
 
 func commandMap() {
-	pokeapi := pokeapi.NewClient()
-	res, err := pokeapi.GetLocationAreas()
+	pokeapiClient := pokeapi.NewClient()
+	res, err := pokeapiClient.GetLocationAreas()
 	if err != nil {
 		fmt.Println(err)
 	}
