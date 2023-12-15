@@ -3,6 +3,6 @@ package main
 import "fmt"
 
 func commandExit() error {
-	fmt.Println("Quitting Gokedex 👋")
+	fmt.Println("Shutting down the Gokedex 👋")
 	return nil
 }
