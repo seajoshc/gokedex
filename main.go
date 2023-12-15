@@ -9,6 +9,7 @@ import (
 
 // Start the REPL
 func main() {
+	fmt.Println("📺 Booting up the Gokedex")
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := validCommands() //commands.go
 
