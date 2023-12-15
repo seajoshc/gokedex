@@ -4,67 +4,34 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 )
 
-func GetLocationAreas() {
-	res, err := http.Get("https://pokeapi.co/api/v2/location-area")
+// method for pokeapi.NewClient()
+func (c *Client) GetLocationAreas() (LocationAreasResp, error) {
+	endpoint := "/location-area"
+	url := baseURL + endpoint
+
+	res, err := http.Get(url)
 	if err != nil {
-		log.Fatal(err)
+		return LocationAreasResp{}, err
 	}
+
 	body, err := io.ReadAll(res.Body)
-	res.Body.Close()
+	if err != nil {
+		return LocationAreasResp{}, err
+	}
+	defer res.Body.Close()
+
 	if res.StatusCode > 399 {
-		log.Fatalf("Response failed with status code: %d and\nbody: %s\n", res.StatusCode, body)
+		return LocationAreasResp{}, fmt.Errorf("response failed with status code: %d and body: %s", res.StatusCode, body)
 	}
+
+	locationAreaResp := LocationAreasResp{}
+	err = json.Unmarshal(body, &locationAreaResp)
 	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%s", body)
-}
-
-func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) error {
-	response, err := json.Marshal(payload)
-	if err != nil {
-		return err
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.WriteHeader(code)
-	w.Write(response)
-	return nil
-}
-
-func respondWithError(w http.ResponseWriter, code int, msg string) error {
-	return respondWithJSON(w, code, map[string]string{"error": msg})
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-	type requestBody struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
-	type responseBody struct {
-		Token string `json:"token"`
+		return LocationAreasResp{}, err
 	}
 
-	dat, err := io.ReadAll(r.Body)
-	if err != nil {
-		respondWithError(w, 500, "couldn't read request")
-		return
-	}
-	params := requestBody{}
-	err = json.Unmarshal(dat, &params)
-	if err != nil {
-		respondWithError(w, 500, "couldn't unmarshal parameters")
-		return
-	}
-
-	// do stuff with username and password
-
-	respondWithJSON(w, 200, responseBody{
-		Token: "example-auth-token",
-	})
+	return locationAreaResp, nil
 }
