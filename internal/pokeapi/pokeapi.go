@@ -11,6 +11,7 @@ type Client struct {
 	httpClient http.Client
 }
 
+// Usage: pokeapiClient := pokeapi.NewClient()
 func NewClient() Client {
 	return Client{
 		httpClient: http.Client{
