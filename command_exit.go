@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-func commandExit() error {
+func commandExit() {
 	fmt.Println("👋 Shutting down the Gokedex")
-	return nil
 }

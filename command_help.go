@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func commandHelp() error {
+func commandHelp() {
 	fmt.Println("")
 	fmt.Println("Gokedex commands are: ")
 	fmt.Println("")
@@ -11,5 +11,4 @@ func commandHelp() error {
 		fmt.Printf("%v: %v\n", command.name, command.description)
 	}
 	fmt.Println("")
-	return nil
 }
