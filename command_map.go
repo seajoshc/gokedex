@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandMap(c *config) {
+func commandMap(c *config) error {
 	fmt.Println("Location areas:")
 
 	res, err := c.pokeapiClient.GetLocationAreas()
@@ -18,4 +18,5 @@ func commandMap(c *config) {
 
 	c.nextPage = res.Next
 	c.previousPage = res.Previous
+	return nil
 }

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func commandHelp(c *config) {
+func commandHelp(c *config) error {
 	fmt.Println("")
 	fmt.Println("Gokedex commands are: ")
 	fmt.Println("")
@@ -11,4 +11,5 @@ func commandHelp(c *config) {
 		fmt.Printf("%v: %v\n", command.name, command.description)
 	}
 	fmt.Println("")
+	return nil
 }
