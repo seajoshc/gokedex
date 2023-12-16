@@ -17,8 +17,6 @@ func main() {
 	// new pokeapi.co client for the session
 	c := config{
 		pokeapiClient: pokeapi.NewClient(),
-		nextPage:      nil,
-		previousPage:  nil,
 	}
 
 	// The REPL
@@ -57,9 +55,9 @@ type cliCommand struct {
 }
 
 type config struct {
-	pokeapiClient pokeapi.Client
-	nextPage      *string
-	previousPage  *string
+	pokeapiClient             pokeapi.Client
+	nextLocationAreasPage     *string
+	previousLocationAreasPage *string
 }
 
 func cleanInput(input string) []string {
