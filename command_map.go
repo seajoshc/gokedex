@@ -12,5 +12,8 @@ func commandMap() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(res)
+
+	for _, location := range res.Results {
+		fmt.Println(location.Name)
+	}
 }
