@@ -2,6 +2,6 @@ package main
 
 import "fmt"
 
-func commandExit() {
+func commandExit(c *config) {
 	fmt.Println("👋 Shutting down the Gokedex")
 }

@@ -2,14 +2,12 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/seajoshc/gokedex/internal/pokeapi"
 )
 
-func commandMap() {
+func commandMap(c *config) {
 	fmt.Println("Location areas:")
-	pokeapiClient := pokeapi.NewClient()
-	res, err := pokeapiClient.GetLocationAreas()
+
+	res, err := c.pokeapiClient.GetLocationAreas()
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -18,6 +16,6 @@ func commandMap() {
 		fmt.Println(location.Name)
 	}
 
-	pokeapiClient.NextPage = res.Next
-	pokeapiClient.PreviousPage = res.Previous
+	c.nextPage = res.Next
+	c.previousPage = res.Previous
 }

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func commandHelp() {
+func commandHelp(c *config) {
 	fmt.Println("")
 	fmt.Println("Gokedex commands are: ")
 	fmt.Println("")

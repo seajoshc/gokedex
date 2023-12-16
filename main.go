@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/seajoshc/gokedex/internal/pokeapi"
 )
 
 // Start the REPL
@@ -12,6 +14,12 @@ func main() {
 	fmt.Println("📺 Booting up the Gokedex")
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := validCommands() //commands.go
+
+	c := config{
+		pokeapiClient: pokeapi.NewClient(),
+		nextPage:      nil,
+		previousPage:  nil,
+	}
 
 	for {
 		fmt.Print("gokedex 🎮 ")
@@ -33,18 +41,24 @@ func main() {
 		}
 
 		if command.name == "exit" {
-			command.callback()
+			command.callback(&c)
 			break
 		}
 
-		command.callback()
+		command.callback(&c)
 	}
 }
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func()
+	callback    func(*config)
+}
+
+type config struct {
+	pokeapiClient pokeapi.Client
+	nextPage      *string
+	previousPage  *string
 }
 
 func validCommands() map[string]cliCommand {
