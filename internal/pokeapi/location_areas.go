@@ -12,6 +12,10 @@ func (c *Client) GetLocationAreas() (LocationAreasResp, error) {
 	endpoint := "/location-area"
 	url := baseURL + endpoint
 
+	if c.NextPage != nil {
+		url = *c.NextPage
+	}
+
 	res, err := http.Get(url)
 	if err != nil {
 		return LocationAreasResp{}, err
