@@ -7,6 +7,7 @@ import (
 )
 
 func commandMap() {
+	fmt.Println("Location areas:")
 	pokeapiClient := pokeapi.NewClient()
 	res, err := pokeapiClient.GetLocationAreas()
 	if err != nil {
@@ -16,4 +17,7 @@ func commandMap() {
 	for _, location := range res.Results {
 		fmt.Println(location.Name)
 	}
+
+	pokeapiClient.NextPage = res.Next
+	pokeapiClient.PreviousPage = res.Previous
 }
