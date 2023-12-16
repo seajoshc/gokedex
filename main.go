@@ -9,18 +9,19 @@ import (
 	"github.com/seajoshc/gokedex/internal/pokeapi"
 )
 
-// Start the REPL
 func main() {
 	fmt.Println("📺 Booting up the Gokedex")
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := validCommands() //commands.go
 
+	// new pokeapi.co client for the session
 	c := config{
 		pokeapiClient: pokeapi.NewClient(),
 		nextPage:      nil,
 		previousPage:  nil,
 	}
 
+	// The REPL
 	for {
 		fmt.Print("gokedex 🎮 ")
 
@@ -52,13 +53,19 @@ func main() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config)
+	callback    func(*config) error
 }
 
 type config struct {
 	pokeapiClient pokeapi.Client
 	nextPage      *string
 	previousPage  *string
+}
+
+func cleanInput(input string) []string {
+	lowercase := strings.TrimSpace(input)
+	words := strings.Fields(lowercase)
+	return words
 }
 
 func validCommands() map[string]cliCommand {
@@ -79,10 +86,4 @@ func validCommands() map[string]cliCommand {
 			callback:    commandMap,
 		},
 	}
-}
-
-func cleanInput(input string) []string {
-	lowercase := strings.TrimSpace(input)
-	words := strings.Fields(lowercase)
-	return words
 }
