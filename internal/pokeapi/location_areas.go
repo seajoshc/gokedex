@@ -8,9 +8,13 @@ import (
 )
 
 // method for pokeapi.NewClient()
-func (c *Client) GetLocationAreas() (LocationAreasResp, error) {
+func (c *Client) GetLocationAreas(pageURL *string) (LocationAreasResp, error) {
 	endpoint := "/location-area"
 	url := baseURL + endpoint
+
+	if pageURL != nil {
+		url = *pageURL
+	}
 
 	res, err := http.Get(url)
 	if err != nil {
