@@ -1,5 +1,11 @@
 package pokeapi
 
+import "net/http"
+
+type Client struct {
+	httpClient http.Client
+}
+
 type LocationAreasResp struct {
 	Count    int     `json:"count"`
 	Next     *string `json:"next"`
