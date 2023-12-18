@@ -80,8 +80,13 @@ func validCommands() map[string]cliCommand {
 		},
 		"map": {
 			name:        "map",
-			description: "Location areas are sections of areas, such as floors in a building or cave. Each area has its own set of possible Pokémon encounters.",
+			description: "Gets the next page of location areas: sections of areas, such as floors in a building or cave. Each area has its own set of possible Pokémon encounters.",
 			callback:    commandMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Paginates back through location areas: sections of areas, such as floors in a building or cave. Each area has its own set of possible Pokémon encounters.",
+			callback:    commandMapb,
 		},
 	}
 }
