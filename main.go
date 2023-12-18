@@ -54,6 +54,7 @@ type cliCommand struct {
 	callback    func(*config) error
 }
 
+// wraps the pokeapi client in config & state
 type config struct {
 	pokeapiClient             pokeapi.Client
 	nextLocationAreasPage     *string
