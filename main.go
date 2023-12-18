@@ -44,7 +44,11 @@ func main() {
 			break
 		}
 
-		command.callback(&c)
+		err := command.callback(&c)
+
+		if err != nil {
+			fmt.Printf("🤯 %v", err)
+		}
 	}
 }
 
